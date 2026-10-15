@@ -1,0 +1,79 @@
+---
+title: "Discussion 6:Working with HTML and JSON."
+author: "Arauca Melendez"
+format: html
+editor: visual
+---
+
+# Introduction
+
+For this assignment, I selected three books related to data science, statistics, and data visualization. I created an HTML file and a JSON file containing the same information about each book. The attributes I included were the title, authors, publication year, and publisher. The purpose of this assignment is to practice reading different file formats into R data frames and checking whether the data match.
+
+# Loading the Packages
+
+```{r}
+library(rvest) 
+library(jsonlite)
+```
+
+## Loading the HTML data
+
+I used the read_html() and html_table() functions from the rvest package to read the HTML file and convert its table into a data frame.
+
+```{r}
+
+library(rvest)
+
+html_url <-"https://raw.githubusercontent.com/araucamelendez/html-json-books/refs/heads/main/books.html"
+
+books_html <- read_html("books.html") |>
+  html_table(convert = FALSE)
+
+books_html <- as.data.frame(books_html[[1]])
+
+books_html
+```
+
+## Loading the JSON file
+```{r}
+library(jsonlite)
+
+json_url <-"https://raw.githubusercontent.com/araucamelendez/html-json-books/refs/heads/main/books.json"
+
+books_json <- fromJSON("books.json")
+
+books_json
+```
+
+# Comparing the two data frames
+
+Before comparing the data frames, I converted all columns to character values. This helps make sure that differences in data types do not affect the comparison. 
+
+```{r}
+books_html[] <- lapply(books_html, as.character)
+books_json[] <- lapply(books_json, as.character)
+
+identical(books_html, books_json)
+```
+After loading the HTML and JSON files into separate data frames, I converted the columns to the same data type and used the identical() function to compare them. The result was TRUE, which means both data frames contain the same information, with matching column names and row order.
+
+This exercise helped me understand how R can read data from different file formats and convert them into data frames for analysis.
+
+I also used all.equal() to check for any differences.
+
+```{r}
+all.equal(books_html, books_json)
+```
+
+# Conclusion
+
+This assignment helped me practice working with two different data formats in R. HTML organizes information using tags and tables, while JSON organizes information using objects and key-value pairs. Although the structures are different, both formats can be converted into data frames.
+
+The comparison allows me to check whether the information in both files matches. This is useful when working with data from different sources because it helps identify inconsistencies before analyzing the data.
+
+
+# References
+
+Wickham, H. (n.d.). *Parse an HTML table into a data frame*. rvest. https://rvest.tidyverse.org/reference/html_table.html
+
+Ooms, J. (n.d.). *jsonlite: A simple and robust JSON parser and generator for R*. GitHub. https://github.com/jeroen/jsonlite
