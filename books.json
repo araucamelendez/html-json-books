@@ -1,0 +1,21 @@
+
+[
+  {
+    "title": "R for Data Science",
+    "authors": "Hadley Wickham, Mine Çetinkaya-Rundel, Garrett Grolemund",
+    "publication_year": 2023,
+    "publisher": "O'Reilly Media"
+  },
+  {
+    "title": "Naked Statistics",
+    "authors": "Charles Wheelan",
+    "publication_year": 2013,
+    "publisher": "W. W. Norton & Company"
+  },
+  {
+    "title": "Storytelling with Data",
+    "authors": "Cole Nussbaumer Knaflic",
+    "publication_year": 2015,
+    "publisher": "Wiley"
+  }
+]
